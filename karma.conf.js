@@ -4,6 +4,15 @@
 
 var argv = require('yargs').argv;
 
+var sourceProcessors = ['coverage'];
+
+function isDebug(argument) {
+  return argument === '--debug';
+}
+if (process.argv.some(isDebug)) {
+  sourceProcessors = [];
+}
+
 module.exports = function(config) {
   config.set({
 
@@ -33,6 +42,7 @@ module.exports = function(config) {
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
       { pattern: 'dist/dev/**/*.js', included: false, watched: true },
       { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: false, watched: false }, // PhantomJS2 (and possibly others) might require it
+      { pattern: 'node_modules/ng2-material/**/*.js', included: false, watched: false },
 
       'test-main.js'
     ],
@@ -47,7 +57,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'dist/**/!(*spec).js': ['coverage']
+      'dist/**/!(*spec).js': sourceProcessors
     },
 
     // test results reporter to use
@@ -116,5 +126,10 @@ module.exports = function(config) {
   if (process.env.TRAVIS || process.env.CIRCLECI) {
     config.browsers = ['Chrome_travis_ci'];
     config.singleRun = true;
+  }
+
+  if(process.argv.some(isDebug)) {
+    config.broswers = ['Chrome'];
+    config.singleRun = false;
   }
 };

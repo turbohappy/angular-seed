@@ -1,13 +1,13 @@
 declare module 'autoprefixer' {
 
-  interface IOptions {
-    browsers: string[];
-  }
+    interface IOptions {
+        browsers:string[];
+    }
 
-  interface IAutoprefixer {
-    (opts?: IOptions): NodeJS.ReadWriteStream;
-  }
+    interface IAutoprefixer {
+        (opts?:IOptions):NodeJS.ReadWriteStream;
+    }
 
-  const autoprefixer: IAutoprefixer;
-  export = autoprefixer;
+    const autoprefixer:IAutoprefixer;
+    export = autoprefixer;
 }

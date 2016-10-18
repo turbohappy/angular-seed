@@ -8,50 +8,50 @@ import {APP_BASE, PROD_DEST, PORT, DOCS_DEST, DOCS_PORT, COVERAGE_PORT} from '..
 
 
 export function serveSPA() {
-  codeChangeTool.listen();
+    codeChangeTool.listen();
 }
 
 export function notifyLiveReload(e:any) {
-  let fileName = e.path;
-  codeChangeTool.changed(fileName);
+    let fileName = e.path;
+    codeChangeTool.changed(fileName);
 }
 
 export function serveDocs() {
-  let server = express();
+    let server = express();
 
-  server.use(
-    APP_BASE,
-    serveStatic(resolve(process.cwd(), DOCS_DEST))
-  );
+    server.use(
+        APP_BASE,
+        serveStatic(resolve(process.cwd(), DOCS_DEST))
+    );
 
-  server.listen(DOCS_PORT, () =>
-    openResource('http://localhost:' + DOCS_PORT + APP_BASE)
-  );
+    server.listen(DOCS_PORT, () =>
+        openResource('http://localhost:' + DOCS_PORT + APP_BASE)
+    );
 }
 
 export function serveCoverage() {
-  let server = express();
+    let server = express();
 
-  server.use(
-    APP_BASE,
-    serveStatic(resolve(process.cwd(), 'coverage'))
-  );
+    server.use(
+        APP_BASE,
+        serveStatic(resolve(process.cwd(), 'coverage'))
+    );
 
-  server.listen(COVERAGE_PORT, () =>
-    openResource('http://localhost:' + COVERAGE_PORT + APP_BASE)
-  );
+    server.listen(COVERAGE_PORT, () =>
+        openResource('http://localhost:' + COVERAGE_PORT + APP_BASE)
+    );
 }
 
 export function serveProd() {
-  let root = resolve(process.cwd(), PROD_DEST);
-  let server = express();
+    let root = resolve(process.cwd(), PROD_DEST);
+    let server = express();
 
-  server.use(APP_BASE, serveStatic(root));
+    server.use(APP_BASE, serveStatic(root));
 
-  server.use(fallback('index.html', { root }));
+    server.use(fallback('index.html', {root}));
 
-  server.listen(PORT, () =>
-    openResource('http://localhost:' + PORT + APP_BASE)
-  );
+    server.listen(PORT, () =>
+        openResource('http://localhost:' + PORT + APP_BASE)
+    );
 
 };

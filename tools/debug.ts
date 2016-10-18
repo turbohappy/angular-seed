@@ -6,7 +6,7 @@ require('../gulpfile');
 const TASK = argv['task'];
 
 if (!TASK) {
-  throw new Error('You must specify a task name.');
+    throw new Error('You must specify a task name.');
 }
 
 console.log('**********************');

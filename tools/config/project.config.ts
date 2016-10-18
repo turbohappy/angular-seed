@@ -3,24 +3,30 @@ import {SeedConfig} from './seed.config';
 import {InjectableDependency} from './seed.config.interfaces';
 
 export class ProjectConfig extends SeedConfig {
-  PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
+    PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
 
-  constructor() {
-    super();
-    // this.APP_TITLE = 'Put name of your app here';
-    let additional_deps: InjectableDependency[] = [
-      // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
-      // {src: 'lodash/lodash.min.js', inject: 'libs'},
-    ];
+    constructor() {
+        super();
+        // this.APP_TITLE = 'Put name of your app here';
+        let additional_deps:InjectableDependency[] = [
+            // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
+            // {src: 'lodash/lodash.min.js', inject: 'libs'},
+            { src: 'ng2-material/dist/ng2-material.css', inject: true },
+            { src: 'ng2-material/dist/font.css', inject: true }
+        ];
 
-    const seedDependencies = this.NPM_DEPENDENCIES;
+        const seedDependencies = this.NPM_DEPENDENCIES;
 
-    this.NPM_DEPENDENCIES = seedDependencies.concat(additional_deps);
+        this.NPM_DEPENDENCIES = seedDependencies.concat(additional_deps);
 
-    this.APP_ASSETS = [
-      // {src: `${this.ASSETS_SRC}/css/toastr.min.css`, inject: true},
-      // {src: `${this.APP_DEST}/assets/scss/global.css`, inject: true},
-      { src: `${this.ASSETS_SRC}/main.css`, inject: true },
-    ];
-  }
+        this.APP_ASSETS = [
+            // {src: `${this.ASSETS_SRC}/css/toastr.min.css`, inject: true},
+            // {src: `${this.APP_DEST}/assets/scss/global.css`, inject: true},
+            {src: `${this.ASSETS_SRC}/main.css`, inject: true},
+            {src: `${this.ASSETS_SRC}/fonts/Inconsolata.css`, inject: true},
+            {src: `${this.ASSETS_SRC}/fonts/Lato.css`, inject: true},
+            {src: `${this.ASSETS_SRC}/fonts/Raleway.css`, inject: true},
+            {src: `${this.ASSETS_SRC}/fonts/MaterialIcons.css`, inject: true}
+        ];
+    }
 }
